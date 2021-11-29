@@ -37,7 +37,7 @@ function initPage() {
         axios.get(UVQueryURL)
         .then(function(response){
             let UVIndex = document.createElement("span");
-            UVIndex.setAttribute("class","badge badge-danger");
+            UVIndex.setAttribute("class","badge badge-success");
             UVIndex.innerHTML = response.data[0].value;
             currentUVEl.innerHTML = "UV Index: ";
             currentUVEl.append(UVIndex);
@@ -98,7 +98,7 @@ function initPage() {
             // <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"></input>
             historyItem.setAttribute("type","text");
             historyItem.setAttribute("readonly",true);
-            historyItem.setAttribute("class", "form-control d-block bg-white");
+            historyItem.setAttribute("class", "form-control d-block text-light bg-dark");
             historyItem.setAttribute("value", searchHistory[i]);
             historyItem.addEventListener("click",function() {
                 getWeather(historyItem.value);
