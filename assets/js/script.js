@@ -17,6 +17,8 @@ function initPage() {
     function getWeather(cityName) {
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + APIKey;
         axios.get(queryURL)
+
+
         .then(function(response){
           var currentDate = new Date(response.data.dt*1000);
           var day = currentDate.getDate(); 
@@ -33,6 +35,9 @@ function initPage() {
         let lon = response.data.coord.lon;
         let UVQueryURL = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&cnt=1";
         axios.get(UVQueryURL)
+
+
+
         .then(function(response){
             let UVIndex = document.createElement("span");
             UVIndex.setAttribute("class","badge badge-success");
@@ -43,6 +48,8 @@ function initPage() {
         let cityID = response.data.id;
         let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&units=imperial" + "&appid=" + APIKey;
         axios.get(forecastQueryURL)
+
+        
         .then(function(response){
            var forecastEls = document.querySelectorAll(".forecast");
            for (i=0; i<forecastEls.length; i++) {
