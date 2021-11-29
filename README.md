@@ -1,4 +1,4 @@
 # weather-dashboard
 
 
-![images](weather-dashboard-screenshot.png)
+![images](/assets/images/weather-dashboard-screenshot.png)
