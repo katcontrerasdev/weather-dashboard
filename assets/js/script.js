@@ -5,7 +5,7 @@ function initPage() {
     var nameEl = document.getElementById("city-name");
     var currentPicEl = document.getElementById("current-pic");
     var currentTempEl = document.getElementById("temperature");
-    var currentHumidityEl = document.getElementById("wind-speed");
+    var currentHumidityEl = document.getElementById("humidity");
     var currentWindEl = document.getElementById("wind-speed");
     var currentUVEl = document.getElementById("UV-index");
     var historyEl = document.getElementById("history");
@@ -16,8 +16,7 @@ function initPage() {
 
 
     function getWeather(cityName) {
-
-        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + APIKey;
         axios.get(queryURL)
         .then(function(response){
           var currentDate = new Date(response.data.dt*1000);
@@ -28,7 +27,7 @@ function initPage() {
           let weatherPic = response.data.weather[0].icon;
             currentPicEl.setAttribute("src","https://openweathermap.org/img/wn/" + weatherPic + "@2x.png");
             currentPicEl.setAttribute("alt",response.data.weather[0].description);
-            currentTempEl.innerHTML = "Temperature: " + k2f(response.data.main.temp) + " &#176F";
+            currentTempEl.innerHTML = "Temperature: " + response.data.main.temp ;
             currentHumidityEl.innerHTML = "Humidity: " + response.data.main.humidity + "%";
             currentWindEl.innerHTML = "Wind Speed: " + response.data.wind.speed + " MPH";
         let lat = response.data.coord.lat;
@@ -39,11 +38,11 @@ function initPage() {
             let UVIndex = document.createElement("span");
             UVIndex.setAttribute("class","badge badge-success");
             UVIndex.innerHTML = response.data[0].value;
-            currentUVEl.innerHTML = "UV Index: ";
+            currentUVEl.innerHTML = "UV Index:";
             currentUVEl.append(UVIndex);
         });
         let cityID = response.data.id;
-        let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
+        let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&units=imperial" + "&appid=" + APIKey;
         axios.get(forecastQueryURL)
         .then(function(response){
            var forecastEls = document.querySelectorAll(".forecast");
@@ -63,7 +62,7 @@ function initPage() {
            forecastWeatherEl.setAttribute("alt",response.data.list[forecastIndex].weather[0].description);
            forecastEls[i].append(forecastWeatherEl);
            var forecastTempEl = document.createElement("p");
-           forecastTempEl.innerHTML = "Temp: " + k2f(response.data.list[forecastIndex].main.temp) + " &#176F";
+           forecastTempEl.innerHTML = "Temp: " + response.data.list[forecastIndex].main.temp;
            forecastEls[i].append(forecastTempEl);
            var forecastHumidityEl = document.createElement("p");
            forecastHumidityEl.innerHTML = "Humidity: " + response.data.list[forecastIndex].main.humidity + "%";
@@ -87,9 +86,7 @@ function initPage() {
         renderSearchHistory();
     })
   
-    function k2f(K) {
-        return Math.floor((K - 273.15) *1.8 +32);
-    }
+  
 
     function renderSearchHistory() {
         historyEl.innerHTML = "";
