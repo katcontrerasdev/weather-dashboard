@@ -85,8 +85,6 @@ function initPage() {
         searchHistory = [];
         renderSearchHistory();
     })
-  
-  
 
     function renderSearchHistory() {
         historyEl.innerHTML = "";
