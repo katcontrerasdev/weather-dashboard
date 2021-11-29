@@ -1,7 +1,6 @@
 function initPage() {
     var inputEl = document.getElementById("city-input");
     var searchEl = document.getElementById("search-button");
-    var clearEl = document.getElementById("clear-history");
     var nameEl = document.getElementById("city-name");
     var currentPicEl = document.getElementById("current-pic");
     var currentTempEl = document.getElementById("temperature");
@@ -81,10 +80,7 @@ function initPage() {
         renderSearchHistory();
     })
 
-    clearEl.addEventListener("click",function() {
-        searchHistory = [];
-        renderSearchHistory();
-    })
+   
 
     function renderSearchHistory() {
         historyEl.innerHTML = "";
